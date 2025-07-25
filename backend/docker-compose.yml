@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    container_name: math-backend
+    volumes:
+      - ./backend/requests.db:/app/requests.db
+    ports:
+      - "5000:5000"
+
+  frontend:
+    build: ./frontend
+    container_name: math-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend

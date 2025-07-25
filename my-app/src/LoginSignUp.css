@@ -1,0 +1,340 @@
+/* Animații CSS */
+@keyframes gradientShift {
+  0%, 100% { 
+    background-position: 0% 50%; 
+  }
+  50% { 
+    background-position: 100% 50%; 
+  }
+}
+
+@keyframes titlePulse {
+  0%, 100% { 
+    transform: scale(1); 
+  }
+  50% { 
+    transform: scale(1.05); 
+  }
+}
+
+@keyframes slideIn {
+  0% { 
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% { 
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { 
+    transform: translateY(0); 
+  }
+  40% { 
+    transform: translateY(-10px); 
+  }
+  60% { 
+    transform: translateY(-5px); 
+  }
+}
+
+@keyframes spin {
+  0% { 
+    transform: rotate(0deg); 
+  }
+  100% { 
+    transform: rotate(360deg); 
+  }
+}
+
+/* Container principal */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #eee 0%, #d2c1f5 50%, #c487f0 100%);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  animation: gradientShift 6s ease infinite;
+  background-size: 200% 200%;
+}
+
+/* Titlu */
+.login-title {
+  font-size: 2.5rem;
+  color: #4a007e;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 10px rgba(74, 0, 126, 0.3);
+  animation: titlePulse 3s ease-in-out infinite;
+}
+
+/* Card principal */
+.login-card {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 20px rgba(106, 27, 154, 0.1);
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.login-card.animate {
+  transform: rotateY(10deg) scale(0.95);
+}
+
+/* Titlu card */
+.card-title {
+  margin-bottom: 1rem;
+  color: #6a1b9a;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* Grup de input-uri */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  align-items: center;
+  width: 100%;
+}
+
+/* Container pentru input */
+.input-container {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-container.animate-input {
+  transform: translateY(-10px);
+  opacity: 0.7;
+}
+
+/* Input-uri */
+.login-input {
+  width: 100%;
+  padding: 1rem 3rem 1rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: rgba(255, 255, 255, 0.9);
+  outline: none;
+}
+
+.login-input.focused {
+  border-color: #6a1b9a;
+  box-shadow: 0 0 20px rgba(106, 27, 154, 0.3);
+  transform: scale(1.02);
+  background-color: white;
+}
+
+.login-input.filled {
+  border-color: #4a007e;
+  background-color: rgba(196, 135, 240, 0.1);
+}
+
+/* Etichete pentru input-uri */
+.input-label {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.input-label.active {
+  transform: translateY(-50%) scale(1.2);
+  filter: brightness(1.2);
+}
+
+/* Toggle pentru parolă */
+.password-toggle {
+  position: absolute;
+  right: 3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0.25rem;
+}
+
+.password-toggle:hover {
+  transform: translateY(-50%) scale(1.2);
+}
+
+/* Grup de butoane */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+/* Buton principal */
+.login-button {
+  padding: 0.75rem 2rem;
+  background-color: #6a1b9a;
+  color: white;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: bold;
+  min-width: 160px;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-button:hover:not(.loading) {
+  transform: scale(1.05);
+  background-color: #4a007e;
+  box-shadow: 0 4px 15px rgba(106, 27, 154, 0.4);
+}
+
+.login-button.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: scale(0.98);
+}
+
+/* Buton clear */
+.clear-button {
+  background-color: #c487f0;
+  padding: 0.75rem 1.5rem;
+  min-width: 100px;
+  color: white;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: bold;
+}
+
+.clear-button:hover {
+  transform: scale(1.05);
+  background-color: #b574e8;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+/* Mesaje */
+.message {
+  margin-top: 1rem;
+  font-size: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  animation: slideIn 0.5s ease-out;
+}
+
+.message.success {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #2e7d32;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.message.error {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #d32f2f;
+  border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+.message-icon {
+  font-size: 1.2rem;
+  animation: bounce 0.6s ease;
+}
+
+/* Container pentru switch */
+.switch-container {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.switch-text {
+  margin: 0.5rem 0;
+  color: #666;
+  font-size: 1rem;
+}
+
+.switch-button {
+  background: none;
+  border: none;
+  color: #6a1b9a;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 1rem;
+  padding: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: bold;
+  border-radius: 0.5rem;
+}
+
+.switch-button:hover {
+  color: #4a007e;
+  transform: scale(1.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .login-title {
+    font-size: 2rem;
+  }
+  
+  .login-card {
+    padding: 1.5rem;
+    max-width: 400px;
+  }
+  
+  .btn-group {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .login-button,
+  .clear-button {
+    width: 100%;
+    max-width: 200px;
+  }
+}

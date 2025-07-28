@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { authFetch } from "./api";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import "./App.css";
 
 function App() {
@@ -23,6 +23,13 @@ function App() {
   const navigate = useNavigate();
   const API_URL = "http://localhost:5000";
 
+
+   useEffect(() => {
+    if (!sessionStorage.getItem("token")) {
+      navigate("/"); // sau "/login"
+    }
+  }, [navigate]);
+
   const toggleUserDropdown = () => {
     setShowUserDropdown(!showUserDropdown);
   };
@@ -33,11 +40,8 @@ function App() {
   };
 
   const confirmLogout = () => {
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("name");
-    sessionStorage.removeItem("email");
-    window.location.reload();
+    sessionStorage.clear(); // ✅ Șterge totul
+    navigate("/");
   };
 
   const cancelLogout = () => {

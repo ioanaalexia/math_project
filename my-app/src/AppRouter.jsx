@@ -23,12 +23,12 @@ function AppRouter() {
       if (res.ok) {
         setIsAuthenticated(true);
       } else {
-        localStorage.removeItem("token");
+        sessionStorage.removeItem("token");
         setIsAuthenticated(false);
       }
     })
     .catch(() => {
-      localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
       setIsAuthenticated(false);
     })
     .finally(() => setLoading(false));

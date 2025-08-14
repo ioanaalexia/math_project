@@ -20,7 +20,7 @@ Math Microservice este o aplicație web completă care oferă un set de operați
 
 - JWT pentru autentificare/autorizație
 
-- SQLAlchemy pentru ORM
+- **SQLAlchemy** pentru ORM
 
 - Pydantic pentru validare input
 

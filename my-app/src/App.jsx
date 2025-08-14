@@ -169,14 +169,14 @@ const handleClearFact = () => {
         <div className="logout-modal-overlay">
           <div className="logout-modal">
             <div className="modal-icon">⚠️</div>
-            <h3>Confirmare Logout</h3>
-            <p>Ești sigur că vrei să te deconectezi?</p>
+            <h3>Logout confirmation</h3>
+            <p>Are you sure you want to logout?</p>
             <div className="modal-buttons">
               <button onClick={confirmLogout} className="confirm-logout-btn">
-                ✓ Da, Logout
+                ✓ Yes, Logout
               </button>
               <button onClick={cancelLogout} className="cancel-logout-btn">
-                ✗ Anulează
+                ✗ No
               </button>
             </div>
           </div>

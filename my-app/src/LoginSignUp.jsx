@@ -134,11 +134,11 @@ function LoginSignUp({ onLoginSuccess }) {
 
   return (
     <div className="login-container">
-      <h1 className="login-title">Math Microservice</h1>
+      <h1 className="login-title">Math Application</h1>
 
       <div className={`login-card ${animateCard ? 'animate' : ''}`}>
         <h2 className="card-title">
-          {isLogin ? "Conectează-te" : "Creează cont"}
+          {isLogin ? "Login" : "Create an account"}
         </h2>
         
         <div className="input-group">
@@ -253,7 +253,7 @@ function LoginSignUp({ onLoginSuccess }) {
 
         <div className="switch-container">
           <p className="switch-text">
-            {isLogin ? "Nu ai cont? 🤔" : "Ai deja cont? 😊"}
+            {isLogin ? "You don't have an account? 🤔" : "Do you already have an account? 😊"}
           </p>
           <button 
             onClick={switchMode}

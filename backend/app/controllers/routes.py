@@ -118,16 +118,6 @@ def register_routes(app):
         cache.clear()
         return jsonify({"message": "Cache golit!"})
 
-    @app.route("/cache/test/<int:n>")
-    def test_cache(n):
-        start = time()
-        result = fibonacci(n)
-        duration = round((time() - start) * 1000, 2)
-        return jsonify({
-            "result": result,
-            "calculated_in_ms": duration
-        })
-
     @app.route("/stats", methods=["GET"])
     @jwt_required()
     def get_stats():
@@ -156,4 +146,15 @@ def register_routes(app):
             "total": total,
             "by_operation": {op: count for op, count in by_operation},
             "avg_duration": {op: round(avg, 2) if avg is not None else None for op, avg in avg_duration}
+        })
+
+    @app.route("/cache/test/<int:n>")
+    def test_cache(n):
+        import time
+        start = time.time()
+        result = fibonacci(n)
+        duration = round((time.time() - start) * 1000, 2)
+        return jsonify({
+            "result": result,
+            "duration_ms": duration
         })

@@ -90,27 +90,26 @@ function Stats() {
 
   return (
     <div className="stats-container">
-      {/* Header */}
+
       <div className="stats-header">
         <button onClick={handleBackToApp} className="back-button">
-          ← Înapoi la operatii
+          ← Back on calculator
         </button>
-        <h1 className="stats-title">📊 Dashboard Statistici</h1>
+        <h1 className="stats-title"> Stats Dashboard</h1>
       </div>
 
-      {/* Navigation Tabs */}
       <div className="stats-tabs">
         <button 
           className={`tab-button ${selectedTab === 'overview' ? 'active' : ''}`}
           onClick={() => setSelectedTab('overview')}
         >
-          📈 Prezentare Generală
+          📈 General Presentation
         </button>
         <button 
           className={`tab-button ${selectedTab === 'operations' ? 'active' : ''}`}
           onClick={() => setSelectedTab('operations')}
         >
-          🔢 Operații
+          🔢 Operations
         </button>
         <button 
           className={`tab-button ${selectedTab === 'performance' ? 'active' : ''}`}
@@ -120,36 +119,34 @@ function Stats() {
         </button>
       </div>
 
-      {/* Content based on selected tab */}
       <div className="stats-content">
         {selectedTab === 'overview' && (
           <div className="overview-section">
-            {/* Summary Cards */}
             <div className="summary-cards">
               <div className="summary-card total">
                 <div className="card-icon">🎯</div>
                 <div className="card-content">
-                  <h3>Total Cereri</h3>
+                  <h3>Total requests</h3>
                   <p className="big-number">{stats.total || 0}</p>
-                  <span className="card-subtitle">Toate operațiile</span>
+                  <span className="card-subtitle">Total Operations</span>
                 </div>
               </div>
 
               <div className="summary-card operations">
                 <div className="card-icon">🔢</div>
                 <div className="card-content">
-                  <h3>Tipuri Operații</h3>
+                  <h3>Types of operations</h3>
                   <p className="big-number">{Object.keys(stats.by_operation || {}).length}</p>
-                  <span className="card-subtitle">Funcții disponibile</span>
+                  <span className="card-subtitle">Available operations</span>
                 </div>
               </div>
 
               <div className="summary-card popular">
                 <div className="card-icon">⭐</div>
                 <div className="card-content">
-                  <h3>Cea mai populară</h3>
+                  <h3>The most popular</h3>
                   <p className="operation-name">{mostUsedOperation[0] || 'N/A'}</p>
-                  <span className="card-subtitle">{mostUsedOperation[1]} utilizări</span>
+                  <span className="card-subtitle">{mostUsedOperation[1]} uses</span>
                 </div>
               </div>
             </div>
@@ -160,7 +157,7 @@ function Stats() {
         {selectedTab === 'operations' && (
           <div className="operations-section">
             <div className="operations-card">
-              <h3>🔢 Statistici pe Operații</h3>
+              <h3>🔢 Statistic on operattion</h3>
               <div className="operations-list">
                 {Object.entries(stats.by_operation || {}).map(([operation, count]) => {
                   const percentage = totalOperations > 0 ? ((count / totalOperations) * 100).toFixed(1) : 0;

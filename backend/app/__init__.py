@@ -4,7 +4,7 @@ from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from app.controllers.routes import register_routes
-from app.db import init_db  # ✅ adaugă asta
+from app.db import init_db
 from app.extensions import cache
 
 
@@ -18,7 +18,7 @@ def create_app():
     CORS(app)
     JWTManager(app)
 
-    init_db()  # ✅ asta creează automat tabelele în DB
+    init_db()
     register_routes(app)
 
     return app

@@ -83,7 +83,6 @@ function Stats() {
     );
   }
 
-  // Calculează statistici suplimentare
   const totalOperations = Object.values(stats.by_operation || {}).reduce((sum, count) => sum + count, 0);
   const mostUsedOperation = Object.entries(stats.by_operation || {}).reduce((max, [op, count]) => 
     count > (max[1] || 0) ? [op, count] : max, ['', 0]);

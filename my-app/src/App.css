@@ -16,7 +16,6 @@ body {
   text-align: center;
 }
 
-/* Header cu titlu și user dropdown */
 .header {
   width: 100%;
   max-width: 800px;
@@ -35,13 +34,11 @@ body {
   text-align: center;
 }
 
-/* User Profile Container */
 .user-profile-container {
   position: relative;
   z-index: 100;
 }
 
-/* User Profile Button */
 .user-profile-button {
   display: flex;
   align-items: center;
@@ -62,7 +59,6 @@ body {
   border-color: rgba(106, 27, 154, 0.4);
 }
 
-/* User Avatar */
 .user-avatar {
   width: 35px;
   height: 35px;
@@ -80,14 +76,12 @@ body {
   text-transform: uppercase;
 }
 
-/* User Name */
 .user-name {
   font-weight: 600;
   color: #4a007e;
   font-size: 1rem;
 }
 
-/* Dropdown Arrow */
 .dropdown-arrow {
   color: #6a1b9a;
   font-size: 0.8rem;
@@ -98,7 +92,6 @@ body {
   transform: rotate(180deg);
 }
 
-/* Dropdown Menu */
 .user-dropdown-menu {
   position: absolute;
   top: calc(100% + 0.5rem);
@@ -112,7 +105,6 @@ body {
   overflow: hidden;
 }
 
-/* Dropdown Header */
 .dropdown-header {
   padding: 1.5rem;
   background: linear-gradient(135deg, #f8f4ff, #f0e6ff);
@@ -155,7 +147,6 @@ body {
   font-size: 0.9rem;
 }
 
-/* Dropdown Items */
 .dropdown-items {
   padding: 0.5rem 0;
 }
@@ -195,14 +186,12 @@ body {
   color: #b71c1c;
 }
 
-/* Dropdown Divider */
 .dropdown-divider {
   height: 1px;
   background: rgba(106, 27, 154, 0.1);
   margin: 0.5rem 0;
 }
 
-/* Dropdown Overlay */
 .dropdown-overlay {
   position: fixed;
   top: 0;
@@ -225,7 +214,6 @@ body {
   }
 }
 
-/* Modal de confirmare logout */
 .logout-modal-overlay {
   position: fixed;
   top: 0;
@@ -311,7 +299,6 @@ body {
   background: linear-gradient(135deg, #4a007e, #2d0050);
 }
 
-/* Animații pentru modal */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -344,7 +331,6 @@ body {
   }
 }
 
-/* Stilurile existente pentru card-uri */
 .card {
   background: white;
   padding: 1.5rem;

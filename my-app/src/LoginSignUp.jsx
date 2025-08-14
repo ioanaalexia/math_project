@@ -42,7 +42,6 @@ function LoginSignUp({ onLoginSuccess }) {
     setMessage("");
 
     if (isLogin) {
-      // Login logic
       if (!formData.email || !formData.password) {
         setMessage("Please fill the form!");
         setIsLoading(false);
@@ -75,7 +74,6 @@ function LoginSignUp({ onLoginSuccess }) {
         setMessage("Connection error!");
       }
     } else {
-      // Sign up logic
       if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
         setMessage("Please fill the form!");
         setIsLoading(false);
@@ -226,11 +224,11 @@ function LoginSignUp({ onLoginSuccess }) {
           >
             {isLoading ? (
               <span className="loading-spinner">
-                ⏳ Se încarcă...
+                ⏳ Loading...
               </span>
             ) : (
               <span>
-                {isLogin ? "🚀 Login" : "✨ Creează cont"}
+                {isLogin ? "🚀 Login" : "✨ Create an account"}
               </span>
             )}
           </button>

@@ -11,7 +11,7 @@ Math Microservice este o aplicație web completă care oferă un set de operați
 
 - Statistici și dashboard pentru monitorizare operații
 
-# Arhitectura si tehncologii folosite
+# Arhitectura si tehnologii folosite
 ## Backend (Python/Flask) ##
 
 - **Flask** microframework (MVCS pattern)

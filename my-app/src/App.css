@@ -447,3 +447,55 @@ p {
     width: 100%;
   }
 }
+
+/* === DARK MODE (bazat pe clasa .dark aplicată pe <body>) === */
+body.dark {
+  background: linear-gradient(to bottom right, #1a1a1a, #2d0050);
+  color: #f2f2f2;
+}
+
+body.dark .card {
+  background: #2a2a2a;
+  color: #eee;
+}
+
+body.dark .header h1 {
+  color: #cfa6ff;
+}
+
+body.dark .user-profile-button {
+  background: rgba(30, 30, 30, 0.9);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark .user-profile-button:hover {
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+}
+
+body.dark .user-dropdown-menu {
+  background: #1c1c1c;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark .dropdown-item {
+  color: #ccc;
+}
+
+body.dark .dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+body.dark .logout-modal {
+  background: #2a2a2a;
+  color: #f2f2f2;
+}
+
+body.dark .confirm-logout-btn {
+  background: linear-gradient(135deg, #d32f2f, #b71c1c);
+}
+
+body.dark .cancel-logout-btn {
+  background: linear-gradient(135deg, #7e57c2, #4a007e);
+}

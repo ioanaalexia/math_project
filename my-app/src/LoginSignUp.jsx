@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./contexts/AuthContext"
 import "./LoginSignUp.css";
 
 function LoginSignUp({ onLoginSuccess }) {
@@ -16,6 +17,7 @@ function LoginSignUp({ onLoginSuccess }) {
   const [showPassword, setShowPassword] = useState(false);
   const [animateCard, setAnimateCard] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
   const API_URL = "http://localhost:5000";
 
   const handleInputChange = (e) => {
@@ -42,7 +44,7 @@ function LoginSignUp({ onLoginSuccess }) {
     if (isLogin) {
       // Login logic
       if (!formData.email || !formData.password) {
-        setMessage("Te rog completează toate câmpurile!");
+        setMessage("Please fill the form!");
         setIsLoading(false);
         return;
       }
@@ -60,30 +62,28 @@ function LoginSignUp({ onLoginSuccess }) {
         });
         
         const data = await res.json();
+
         console.log("Răspuns brut:", data);
         if (res.ok) {
-          console.log("Token primit:", data.token);
-          sessionStorage.setItem("token", data.token);
-          sessionStorage.setItem("name", data.name);
-          sessionStorage.setItem("email", data.email);
-          setMessage("Login realizat cu succes!");
-          navigate("/app");
+          login({ token: data.token, name: data.name, email: data.email });
+          setMessage("Login created successfully!");
+          onLoginSuccess();
         } else {
-          setMessage(data.message || "Eroare la login!");
+          setMessage(data.message || "Erorr!");
         }
       } catch (error) {
-        setMessage("Eroare de conexiune!");
+        setMessage("Connection error!");
       }
     } else {
       // Sign up logic
       if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
-        setMessage("Te rog completează toate câmpurile!");
+        setMessage("Please fill the form!");
         setIsLoading(false);
         return;
       }
 
       if (formData.password !== formData.confirmPassword) {
-        setMessage("Parolele nu se potrivesc!");
+        setMessage("Passwords don't match!");
         setIsLoading(false);
         return;
       }
@@ -104,12 +104,12 @@ function LoginSignUp({ onLoginSuccess }) {
         const data = await res.json();
         
         if (res.ok) {
-          setMessage("Cont creat cu succes!");
+          setMessage("Account created successfully!");
         } else {
-          setMessage(data.message || "Eroare la crearea contului!");
+          setMessage(data.message || "Error when creating account!");
         }
       } catch (error) {
-        setMessage("Eroare de conexiune!");
+        setMessage("Connection error!");
       }
     }
 
@@ -203,7 +203,7 @@ function LoginSignUp({ onLoginSuccess }) {
             <div className={`input-container ${animateCard ? 'animate-input' : ''}`}>
               <input
                 type={showPassword ? "text" : "password"}
-                placeholder="Confirmă parola"
+                placeholder="Confirm password"
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleInputChange}
@@ -230,7 +230,7 @@ function LoginSignUp({ onLoginSuccess }) {
               </span>
             ) : (
               <span>
-                {isLogin ? "🚀 Conectează-te" : "✨ Creează cont"}
+                {isLogin ? "🚀 Login" : "✨ Creează cont"}
               </span>
             )}
           </button>
@@ -259,7 +259,7 @@ function LoginSignUp({ onLoginSuccess }) {
             onClick={switchMode}
             className="switch-button"
           >
-            {isLogin ? "✨ Creează unul aici" : "🚀 Conectează-te aici"}
+            {isLogin ? "✨ Create an account here" : "🚀 Login"}
           </button>
         </div>
       </div>

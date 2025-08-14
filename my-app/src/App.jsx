@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { authFetch } from "./api";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from "./contexts/AuthContext"
 import "./App.css";
 
 function App() {
@@ -17,18 +18,14 @@ function App() {
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
 
+  
   const name = sessionStorage.getItem("name") || "Utilizator";
   const initial = name.charAt(0).toUpperCase();
   const email = sessionStorage.getItem("email") || "user@example.com";
   const navigate = useNavigate();
   const API_URL = "http://localhost:5000";
-
-
-   useEffect(() => {
-    if (!sessionStorage.getItem("token")) {
-      navigate("/"); // sau "/login"
-    }
-  }, [navigate]);
+  
+  const {logout} = useAuth();
 
   const toggleUserDropdown = () => {
     setShowUserDropdown(!showUserDropdown);
@@ -40,8 +37,9 @@ function App() {
   };
 
   const confirmLogout = () => {
-    sessionStorage.clear(); // ✅ Șterge totul
-    navigate("/");
+    console.log("Logging out...");
+    logout();
+    navigate("/", { replace: true });
   };
 
   const cancelLogout = () => {

@@ -1,9 +1,10 @@
-from functools import lru_cache
 from app.extensions import cache
+
 
 @cache.memoize(timeout=300)
 def calculate_power(base, exp):
     return base ** exp
+
 
 @cache.memoize(timeout=300)
 def factorial(n):
@@ -13,6 +14,7 @@ def factorial(n):
     for i in range(2, n + 1):
         result *= i
     return result
+
 
 @cache.memoize(timeout=300)
 def fibonacci(n):

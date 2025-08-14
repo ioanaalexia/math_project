@@ -2,6 +2,7 @@ from app.db import SessionLocal
 from app.models import RequestLog
 from datetime import datetime
 
+
 def log_request(operation, input_data, result, duration_ms=None):
     db = SessionLocal()
     entry = RequestLog(

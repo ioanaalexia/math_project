@@ -1,17 +1,17 @@
 from flask import request, jsonify
 from pydantic import ValidationError
-from app.schemas import PowerInput
 from app.services.logic import calculate_power, factorial, fibonacci
 from app.services.logger import log_request
 from app.services.auth import create_user, authenticate_user
 from app.models import RequestLog
 from flask_jwt_extended import create_access_token, jwt_required
-from werkzeug.security import generate_password_hash, check_password_hash
 from app.db import SessionLocal
 from app.models import User
 from time import time
 from app.schemas import PowerInput
 from sqlalchemy import func
+from app.extensions import cache
+
 
 def register_routes(app):
     @app.route("/pow", methods=["POST"])
@@ -39,8 +39,6 @@ def register_routes(app):
         except ValueError as e:
             return jsonify({"error": str(e)}), 400
 
-    from time import time
-
     @app.route("/fibonacci/<int:n>")
     @jwt_required()
     def fibonacci_route(n):
@@ -52,7 +50,6 @@ def register_routes(app):
             return jsonify({"result": result, "duration_ms": duration})
         except ValueError as e:
             return jsonify({"error": str(e)}), 400
-
 
     @app.route("/logs", methods=["GET"])
     @jwt_required()

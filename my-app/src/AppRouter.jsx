@@ -1,47 +1,58 @@
-import { useState, useEffect } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "./contexts/AuthContext"
 import App from "./App";
 import LoginSignUp from "./LoginSignUp";
+import Stats from "./Stats";
 
-function AppRouter() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-  const token = sessionStorage.getItem("token");
-  if (!token) {
-    setIsAuthenticated(false);
-    setLoading(false);
-    return;
-  }
-
-  fetch("http://localhost:5000/logs", {
-    headers: {
-      "Authorization": `Bearer ${token}`,
-    },
-  })
-    .then(res => {
-      if (res.ok) {
-        setIsAuthenticated(true);
-      } else {
-        sessionStorage.removeItem("token");
-        setIsAuthenticated(false);
-      }
-    })
-    .catch(() => {
-      sessionStorage.removeItem("token");
-      setIsAuthenticated(false);
-    })
-    .finally(() => setLoading(false));
-}, []);
-
-
-  const handleLoginSuccess = () => {
-    setIsAuthenticated(true);
-  };
+function ProtectedRoute({ children }) {
+  const { isAuthenticated, loading } = useAuth();
+  const location = useLocation();
 
   if (loading) return null;
 
-  return isAuthenticated ? <App /> : <LoginSignUp onLoginSuccess={handleLoginSuccess} />;
+  if (!isAuthenticated) {
+    return <Navigate to="/" state={{ from: location }} replace />;
+  }
+
+  return children;
+}
+
+function AppRouter() {
+  const { isAuthenticated, loading } = useAuth();
+
+  if (loading) return null;
+
+  return (
+    <Routes>
+      <Route
+        path="/"
+        element={
+          isAuthenticated ? (
+            <Navigate to="/app" replace />
+          ) : (
+            <LoginSignUp />
+          )
+        }
+      />
+      <Route
+        path="/app"
+        element={
+          <ProtectedRoute>
+            <App />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/stats"
+        element={
+          <ProtectedRoute>
+            <Stats />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
+  );
 }
 
 export default AppRouter;

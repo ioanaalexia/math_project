@@ -141,10 +141,6 @@ const handleClearFact = () => {
               <div className="dropdown-divider"></div>
               
               <div className="dropdown-items">
-                <button className="dropdown-item">
-                  <span className="item-icon">🌙</span>
-                  <span>Mod întunecat</span>
-                </button>
                 <button className="dropdown-item" onClick={() => navigate("/stats")}>
                   <span className="item-icon">📊</span>
                   <span>Stats</span>

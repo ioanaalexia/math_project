@@ -449,7 +449,7 @@ p {
 }
 
 /* === DARK MODE (bazat pe clasa .dark aplicată pe <body>) === */
-body.dark {
+/* body.dark {
   background: linear-gradient(to bottom right, #1a1a1a, #2d0050);
   color: #f2f2f2;
 }
@@ -498,4 +498,4 @@ body.dark .confirm-logout-btn {
 
 body.dark .cancel-logout-btn {
   background: linear-gradient(135deg, #7e57c2, #4a007e);
-}
+} */

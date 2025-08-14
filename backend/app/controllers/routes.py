@@ -4,7 +4,7 @@ from app.services.logic import calculate_power, factorial, fibonacci
 from app.services.logger import log_request
 from app.services.auth import create_user, authenticate_user
 from app.models import RequestLog
-from flask_jwt_extended import create_access_token, jwt_required
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from app.db import SessionLocal
 from app.models import User
 from time import time
@@ -55,8 +55,14 @@ def register_routes(app):
     @jwt_required()
     def get_logs():
         db = SessionLocal()
-        logs = db.query(RequestLog).order_by(RequestLog.timestamp.desc()).all()
+        user_email = get_jwt_identity()
+        
+        logs = db.query(RequestLog) \
+                .filter_by(email=user_email) \
+                .order_by(RequestLog.timestamp.desc()) \
+                .all()
         db.close()
+
         result = [
             {
                 "id": log.id,
@@ -68,6 +74,7 @@ def register_routes(app):
             for log in logs
         ]
         return jsonify(result)
+
 
     @app.route("/signup", methods=["POST"])
     def signup():
@@ -125,20 +132,22 @@ def register_routes(app):
     @jwt_required()
     def get_stats():
         db = SessionLocal()
+        user_email = get_jwt_identity()
 
-        total = db.query(func.count(RequestLog.id)).scalar()
+        total = db.query(func.count(RequestLog.id)).filter_by(email=user_email).scalar()
 
         by_operation = (
             db.query(RequestLog.operation, func.count(RequestLog.id))
+            .filter_by(email=user_email)
             .group_by(RequestLog.operation)
             .all()
         )
 
         avg_duration = (
             db.query(RequestLog.operation, func.avg(RequestLog.duration_ms))
+            .filter_by(email=user_email)
             .group_by(RequestLog.operation)
             .all()
-            if hasattr(RequestLog, "duration_ms") else []
         )
 
         db.close()

@@ -24,3 +24,4 @@ class RequestLog(Base):
     result = Column(String, nullable=False)
     timestamp = Column(DateTime, default=datetime.utcnow)
     duration_ms = Column(Float)
+    email = Column(String, nullable=False)
